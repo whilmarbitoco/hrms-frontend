@@ -167,13 +167,10 @@ export default function UserManagementPage() {
           />
           <Select 
             label="Role" 
+            options={ROLE_OPTIONS.map((role) => ({ label: role.label, value: role.id }))}
             {...register('role_id')} 
             error={errors.role_id?.message}
-          >
-            {ROLE_OPTIONS.map((role) => (
-              <option key={role.id} value={role.id}>{role.label}</option>
-            ))}
-          </Select>
+          />
           <div className="flex justify-end gap-3 pt-4">
             <Button variant="outline" type="button" onClick={() => setIsCreateModalOpen(false)}>Cancel</Button>
             <Button type="submit" isLoading={createUserMutation.isPending}>Create User</Button>
