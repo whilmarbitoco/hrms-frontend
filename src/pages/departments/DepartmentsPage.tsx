@@ -158,7 +158,14 @@ export default function DepartmentsPage() {
         ) : (
           <Table headers={['Department', 'Description', 'Employees', 'Actions']}>
             {departments.map((department) => (
-              <TableRow key={department.id}>
+              <TableRow
+                key={department.id}
+                rowData={{
+                  Department: department.name,
+                  Description: department.description || 'No description provided',
+                  Employees: department.employee_count || 0,
+                }}
+              >
                 <TableCell>
                   <p className="text-sm font-semibold text-ink-base">{department.name}</p>
                 </TableCell>

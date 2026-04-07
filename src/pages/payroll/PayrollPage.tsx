@@ -159,7 +159,17 @@ export default function PayrollPage() {
           ) : (
             <Table headers={['Batch', 'Generated on', 'Gross pay', 'Deductions', 'Net pay', 'Status']}>
               {payslips.map((payslip) => (
-                <TableRow key={payslip.id}>
+                <TableRow
+                  key={payslip.id}
+                  rowData={{
+                    Batch: `Batch #${payslip.batch_id}`,
+                    Generated: payslip.generated_at ? formatDate(payslip.generated_at) : 'Pending',
+                    Gross: formatCurrency(payslip.gross),
+                    Deductions: `-${formatCurrency(payslip.deductions)}`,
+                    Net: formatCurrency(payslip.net),
+                    Status: payslip.status,
+                  }}
+                >
                   <TableCell className="text-sm font-semibold text-ink-base">Batch #{payslip.batch_id}</TableCell>
                   <TableCell className="text-sm text-ink-muted">
                     {payslip.generated_at ? formatDate(payslip.generated_at) : 'Pending'}
@@ -228,7 +238,15 @@ export default function PayrollPage() {
         ) : (
           <Table headers={['Batch', 'Cycle', 'Period', 'Status', 'Actions']}>
             {batches.map((batch) => (
-              <TableRow key={batch.id}>
+              <TableRow
+                key={batch.id}
+                rowData={{
+                  Batch: batch.name,
+                  Cycle: batch.cycle,
+                  Period: `${formatDate(batch.period_start)} to ${formatDate(batch.period_end)}`,
+                  Status: batch.status,
+                }}
+              >
                 <TableCell className="text-sm font-semibold text-ink-base">{batch.name}</TableCell>
                 <TableCell className="text-sm text-ink-muted">{batch.cycle}</TableCell>
                 <TableCell className="text-sm text-ink-muted">

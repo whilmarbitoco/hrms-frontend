@@ -216,7 +216,17 @@ export default function EmployeesPage() {
             headers={['Employee', 'Department', 'Role', 'Status', 'Hire date', 'Actions']}
           >
             {employees.map((employee) => (
-              <TableRow key={employee.id}>
+              <TableRow
+                key={employee.id}
+                rowData={{
+                  Name: employee.name,
+                  Email: employee.email,
+                  Department: employee.department?.name || 'Not assigned',
+                  Role: employee.role?.name || 'Not assigned',
+                  Status: employee.status,
+                  'Hire date': employee.hired_at ? formatDate(employee.hired_at) : 'Not set',
+                }}
+              >
                 <TableCell>
                   <div className="flex items-center gap-4">
                     <div className="rounded-2xl border border-border-base bg-paper-sunken p-3">

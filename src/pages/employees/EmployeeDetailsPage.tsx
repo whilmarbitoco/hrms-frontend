@@ -255,7 +255,14 @@ export default function EmployeeDetailsPage() {
               {isSalaryLoading ? <Loader /> : (
                 <Table headers={['Name', 'Type', 'Amount', 'Actions']}>
                   {salaryComponents?.map((comp) => (
-                    <TableRow key={comp.id}>
+                    <TableRow
+                      key={comp.id}
+                      rowData={{
+                        Name: comp.name,
+                        Type: comp.type,
+                        Amount: `$${Number(comp.amount).toLocaleString()}`,
+                      }}
+                    >
                       <TableCell className="font-medium text-slate-900">{comp.name}</TableCell>
                       <TableCell>
                         <span className={cn(

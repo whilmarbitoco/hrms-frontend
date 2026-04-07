@@ -120,7 +120,15 @@ export default function UserManagementPage() {
         ) : (
           <Table headers={['User', 'Email', 'Role', 'Status', 'Actions']}>
             {users.map((user) => (
-              <TableRow key={user.id}>
+              <TableRow
+                key={user.id}
+                rowData={{
+                  Name: user.name,
+                  Email: user.email,
+                  Role: user.role ? ROLE_LABELS_BY_NAME[user.role] ?? user.role : 'Unassigned',
+                  Status: user.is_active ? 'Active' : 'Inactive',
+                }}
+              >
                 <TableCell>
                   <div className="flex items-center gap-4">
                     <div className="rounded-2xl border border-border-base bg-paper-sunken p-3">

@@ -163,7 +163,15 @@ export default function EmployeeRolesPage() {
         ) : (
           <Table headers={['Role', 'Level', 'Description', 'Employees', 'Actions']}>
             {roles.map((role) => (
-              <TableRow key={role.id}>
+              <TableRow
+                key={role.id}
+                rowData={{
+                  Role: role.name,
+                  Level: role.level || 'Not set',
+                  Description: role.description || 'No description provided',
+                  Employees: role.employee_count || 0,
+                }}
+              >
                 <TableCell>
                   <p className="text-sm font-semibold text-ink-base">{role.name}</p>
                 </TableCell>

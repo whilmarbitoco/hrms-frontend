@@ -238,7 +238,18 @@ export default function LeaveManagementPage() {
             }
           >
             {requests.map((request) => (
-              <TableRow key={request.id}>
+              <TableRow
+                key={request.id}
+                rowData={{
+                  Employee: request.employee_id,
+                  Policy: request.policy?.name ?? `Policy #${request.policy_id}`,
+                  Type: request.policy?.type ?? 'Leave policy',
+                  Dates: `${formatDate(request.start_date)} to ${formatDate(request.end_date)}`,
+                  Days: request.days,
+                  Status: request.status,
+                  Reason: request.reason ?? 'N/A',
+                }}
+              >
                 {!isEmployee && (
                   <TableCell>
                     <div className="flex items-center gap-4">
