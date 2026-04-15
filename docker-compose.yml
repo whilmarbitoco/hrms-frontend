@@ -1,0 +1,12 @@
+services:
+  web:
+    build: .
+    networks:
+      - dokploy-network
+    expose:
+      - 80
+    # No need to map host ports; Dokploy/Traefik handles routing via 'expose'
+
+networks:
+  dokploy-network:
+    external: true
