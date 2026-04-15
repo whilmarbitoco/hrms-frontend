@@ -5,7 +5,7 @@
 
 import React from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import { Toaster } from "./components/ui/Toaster";
 
@@ -71,7 +71,7 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <HashRouter>
+        <BrowserRouter>
           <Routes>
             {/* Auth Routes */}
             <Route path="/auth" element={<AuthLayout />}>
@@ -172,7 +172,7 @@ export default function App() {
 
             <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Routes>
-        </HashRouter>
+        </BrowserRouter>
         <Toaster />
       </AuthProvider>
     </QueryClientProvider>
